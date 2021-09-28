@@ -71,6 +71,6 @@ export default {
 
 <style scoped>
 .textInputs {
-  width: 400px;
+  min-width: 400px;
 }
 </style>
