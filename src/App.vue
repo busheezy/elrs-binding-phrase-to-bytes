@@ -12,14 +12,16 @@
         class="textInputs"
         disabled
         type="text"
-        :value="uidBytesFromText(textInput)"
+        :value="uidBytesFromText"
       />
+
       <br />
+
       <input
         class="textInputs"
         disabled
         type="text"
-        :value="`set expresslrs_uid ${uidBytesFromText(textInput)}`"
+        :value="`set expresslrs_uid ${uidBytesFromText}`"
       />
     </div>
   </div>
@@ -42,20 +44,6 @@ function getBytesFromWordArray(wordArray) {
   return result;
 }
 
-function uidBytesFromText(text) {
-  if (text === '') {
-    return ''
-  }
-
-  const bindingPhraseFull = `-DMY_BINDING_PHRASE="${text}"`
-  const bindingPhraseFullEncoded = CryptoJS.enc.Utf8.parse(bindingPhraseFull)
-
-  const ciphertext = CryptoJS.MD5(bindingPhraseFullEncoded);
-  const uidBytes = getBytesFromWordArray(ciphertext);
-
-  return uidBytes
-}
-
 export default {
   name: 'App',
   data() {
@@ -63,8 +51,22 @@ export default {
       textInput: ''
     }
   },
-  methods: {
-    uidBytesFromText
+  computed: {
+    uidBytesFromText() {
+      const text = this.textInput;
+
+      if (text === '') {
+        return ''
+      }
+
+      const bindingPhraseFull = `-DMY_BINDING_PHRASE="${text}"`
+      const bindingPhraseFullEncoded = CryptoJS.enc.Utf8.parse(bindingPhraseFull)
+
+      const ciphertext = CryptoJS.MD5(bindingPhraseFullEncoded);
+      const uidBytes = getBytesFromWordArray(ciphertext);
+
+      return uidBytes
+    }
   }
 }
 </script>
