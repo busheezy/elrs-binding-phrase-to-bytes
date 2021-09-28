@@ -39,7 +39,7 @@ function getBytesFromWordArray(wordArray) {
   result.push(wordArray.words[1] >>> 24);
   result.push((wordArray.words[1] >>> 16) & 0xFF);
 
-	return result;
+  return result;
 }
 
 function uidBytesFromText(text) {
