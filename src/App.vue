@@ -72,7 +72,7 @@ export default {
       return uidBytes;
     },
     betaflightCommand() {
-      return `set expresslrs_uid ${this.uidBytesFromText}\nsave`;
+      return `set expresslrs_uid = ${this.uidBytesFromText}\nsave`;
     },
   },
   methods: {
